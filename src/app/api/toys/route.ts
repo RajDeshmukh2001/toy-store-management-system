@@ -2,6 +2,19 @@ import { conn } from "@/lib/db";
 import Toy from "@/models/Toy";
 import { NextResponse } from "next/server";
 
+export async function GET() {
+    try {
+        await conn();
+        const toys = await Toy.find({});
+        return NextResponse.json(toys, { status: 200 });
+    } catch (error) {
+        return NextResponse.json(
+            { error: "Internal Server Error" },
+            { status: 500 }
+        );
+    }
+}
+
 export async function POST(request: Request) {
     try {
         const { name, price } = await request.json();
