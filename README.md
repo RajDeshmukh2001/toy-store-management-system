@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MVC (Model–View–Controller) Architecture
 
-## Getting Started
+MVC (Model–View–Controller) is an architectural design pattern used to structure applications by separating concerns into three interconnected components:
 
-First, run the development server:
+- **Model** → Business logic & data  
+- **View** → UI / Presentation  
+- **Controller** → Request handling & coordination  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Objectives
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Separation of concerns  
+- Cleaner codebase  
+- Scalability  
+- Maintainability  
+- Testability  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Model
 
-To learn more about Next.js, take a look at the following resources:
+### What is the Model?
+The **Model** represents:
+- Application data  
+- Business rules  
+- Domain logic  
+- State of the application  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The Model is **independent of UI and user input**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Responsibilities of Model
+- Stores data  
+- Applies business rules  
+- Performs validations  
+- Interacts with databases / APIs  
 
-## Deploy on Vercel
+### What a Model Contains
+- Entities / Domain objects  
+- Data access logic (DAO / Repository)  
+- Business validations  
+- Calculations  
+- Rules & constraints  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### What Model Should **NOT** Do
+- Handle HTTP requests  
+- Render UI  
+- Read user input directly  
+- Know about Controllers or Views  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## View
+
+### What is the View?
+The **View** is responsible for:
+- Displaying data to the user  
+- Rendering UI  
+- Formatting output  
+
+It **does not contain business logic**.
+
+### Responsibilities of View
+- Display data  
+- UI formatting  
+- Simple conditional rendering  
+- User interaction display  
+
+### Examples of Views
+- HTML / JSP / Thymeleaf  
+- React / Angular / Vue UI  
+- Mobile UI screens  
+- CLI output  
+
+### What View Should **NOT** Do
+- Modify data  
+- Apply business rules  
+- Call databases  
+- Decide application flow  
+
+---
+
+## Controller
+
+### What is the Controller?
+The **Controller**:
+- Acts as a middleman  
+- Handles user input  
+- Coordinates between Model and View  
+
+### Responsibilities of Controller
+- Receives requests  
+- Validates input (light validation)  
+- Calls Model methods  
+- Chooses which View to render  
+- Sends responses  
+
+### What Controller Should **NOT** Do
+- Business logic  
+- Database queries  
+- Heavy calculations  
+
+---
+
+## Best Practices
+
+- Keep controllers **thin**
+- Put business logic in **Services / Models**
+- Use **DTOs / ViewModels**
+- Validate at multiple layers
+- Follow **SOLID principles**
+- Unit test **Model & Controller**
+- Keep **View logic minimal**
+
+---
+
+## Summary
+
+| Layer       | Responsibility                  |
+|------------|----------------------------------|
+| Model       | Data & Business Logic            |
+| View        | UI & Presentation                |
+| Controller  | Request Handling & Coordination  |
+
+MVC helps build applications that are **clean, scalable, and easy to maintain**.
