@@ -4,6 +4,24 @@ import { Toy } from "@/types/toy";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [toys, setToys] = useState<Toy[]>([]);
+
+  const fetchToys = async () => {
+    try {
+      const res = await fetch("/api/toys", { cache: "no-store" });
+      if (!res.ok) {
+        throw new Error("Failed to fetch toys");
+      }
+      const data = await res.json();
+      return setToys(data);
+    } catch (error) {
+      console.error("Error fetching toys:", error);
+      return [];
+    }
+  };
+
+  useEffect(() => { fetchToys(); }, []);
+
   return (
     <div className="w-full">
       <div className="p-4 w-full flex flex-col items-center justify-center gap-4">
@@ -22,14 +40,16 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              <tr key="toy1" className="bg-neutral-primary border-b border-default">
-                <th scope="row" className="px-6 py-4 font-medium text-heading whitespace-nowrap capitalize">
-                  Toy1
-                </th>
-                <td className="px-6 py-4">
-                  $19.99
-                </td>
-              </tr>
+              {toys.map((toy) => (
+                <tr key={toy.name} className="bg-neutral-primary border-b border-default">
+                  <th scope="row" className="px-6 py-4 font-medium text-heading whitespace-nowrap capitalize">
+                    {toy.name}
+                  </th>
+                  <td className="px-6 py-4">
+                    ${toy.price.toFixed(2)}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
