@@ -16,5 +16,5 @@ const toySchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Toy = mongoose.models.Toy || mongoose.model("toys", toySchema);
+const Toy = models.Toy || mongoose.model("Toy", toySchema);
 export default Toy;
